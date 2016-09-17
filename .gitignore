@@ -1,3 +1,4 @@
 GDL_AI_Jam/Library/
 GDL_AI_Jam/Temp/
 GDL_AI_Jam/obj/
+*.csproj
