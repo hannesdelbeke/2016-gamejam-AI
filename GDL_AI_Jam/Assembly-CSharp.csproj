@@ -45,34 +45,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\GameAnalytics\Plugins\Playmaker\SendBusinessEvent.cs" />
-     <Compile Include="Assets\GameAnalytics\Plugins\Playmaker\SendDesignEvent.cs" />
-     <Compile Include="Assets\GameAnalytics\Plugins\Playmaker\SendErrorEvent.cs" />
-     <Compile Include="Assets\GameAnalytics\Plugins\Playmaker\SendProgressionEvent.cs" />
-     <Compile Include="Assets\GameAnalytics\Plugins\Playmaker\SendResourceEvent.cs" />
-     <Compile Include="Assets\GameAnalytics\Plugins\Playmaker\SetBirthYear.cs" />
-     <Compile Include="Assets\GameAnalytics\Plugins\Playmaker\SetCustomDimension.cs" />
-     <Compile Include="Assets\GameAnalytics\Plugins\Playmaker\SetFacebookID.cs" />
-     <Compile Include="Assets\GameAnalytics\Plugins\Playmaker\SetGender.cs" />
-     <Compile Include="Assets\GameAnalytics\Plugins\Scripts\Enums.cs" />
-     <Compile Include="Assets\GameAnalytics\Plugins\Scripts\Events\GA_Business.cs" />
-     <Compile Include="Assets\GameAnalytics\Plugins\Scripts\Events\GA_Debug.cs" />
-     <Compile Include="Assets\GameAnalytics\Plugins\Scripts\Events\GA_Design.cs" />
-     <Compile Include="Assets\GameAnalytics\Plugins\Scripts\Events\GA_Error.cs" />
-     <Compile Include="Assets\GameAnalytics\Plugins\Scripts\Events\GA_Progression.cs" />
-     <Compile Include="Assets\GameAnalytics\Plugins\Scripts\Events\GA_Resource.cs" />
-     <Compile Include="Assets\GameAnalytics\Plugins\Scripts\Events\GA_Setup.cs" />
-     <Compile Include="Assets\GameAnalytics\Plugins\Scripts\Events\GA_SpecialEvents.cs" />
-     <Compile Include="Assets\GameAnalytics\Plugins\Scripts\GameAnalytics.cs" />
-     <Compile Include="Assets\GameAnalytics\Plugins\Scripts\Setup\Settings.cs" />
-     <Compile Include="Assets\GameAnalytics\Plugins\Scripts\Utilities\GA_MiniJson.cs" />
-     <Compile Include="Assets\GameAnalytics\Plugins\Scripts\Wrapper\GA_AndroidWrapper.cs" />
-     <Compile Include="Assets\GameAnalytics\Plugins\Scripts\Wrapper\GA_MonoWrapper.cs" />
-     <Compile Include="Assets\GameAnalytics\Plugins\Scripts\Wrapper\GA_Wrapper.cs" />
-     <Compile Include="Assets\GameAnalytics\Plugins\Scripts\Wrapper\GA_iOSWrapper.cs" />
-     <Compile Include="Assets\GameAnalytics\Plugins\Scripts\Wrapper\GA_tvOSWrapper.cs" />
-     <None Include="Assets\GameAnalytics\Readme.txt" />
-     <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
+     <Compile Include="Assets\Scripts\InputHandler.cs" />
+     <Compile Include="Assets\Scripts\Player.cs" />
+     <Compile Include="Assets\Scripts\PlayerSpawner.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
