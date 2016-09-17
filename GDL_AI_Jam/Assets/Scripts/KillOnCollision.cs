@@ -5,7 +5,6 @@ public class KillOnCollision : MonoBehaviour
 {
     void Start()
     {
-        _collider = GetComponent<Collider>();
     }
 
     void OnTriggerEnter(Collider otherCollider)
@@ -29,6 +28,4 @@ public class KillOnCollision : MonoBehaviour
     {
         player.Kill();
     }
-
-    Collider _collider;
 }
