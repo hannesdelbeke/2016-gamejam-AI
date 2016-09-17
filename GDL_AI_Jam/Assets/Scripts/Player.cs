@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
 
         //add random jitter so they don't all spawn on top of one another
-        this.transform.position = new Vector3(Random.Range(-0.1f, 0.1f), 0, Random.Range(-0.1f, 0.1f));
+        this.transform.position += new Vector3(Random.Range(-0.1f, 0.1f), 0, Random.Range(-0.1f, 0.1f));
     }
 
     void Update()

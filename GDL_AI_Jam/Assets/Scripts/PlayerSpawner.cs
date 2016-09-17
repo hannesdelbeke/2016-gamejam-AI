@@ -36,7 +36,7 @@ public class PlayerSpawner : MonoBehaviour
 
     void SpawnPlayer(int i)
     {
-        GameObject playerGO = (GameObject)Instantiate(PlayerPrefab.gameObject, transform.position, Quaternion.identity);
+        GameObject playerGO = (GameObject)Instantiate(PlayerPrefab.gameObject, this.transform.position, Quaternion.identity);
         _players[i] = playerGO.GetComponent<Player>();
         _players[i].ControllerNumber = i;
     }
