@@ -37,12 +37,11 @@ public class Player : MonoBehaviour
         {
             float xInp = Input.GetAxis(_xAxisName + ControllerNumber);
             float yInp = Input.GetAxis(_yAxisName + ControllerNumber);
-            Vector3 dir = new Vector3(xInp, 0, -yInp);
+            Vector3 dir = new Vector3(xInp, 0, -yInp).normalized;
             _rb.AddForce(dir * MoveForce);
 
             //rotate him to face the direction of travel
-            Vector3 velocity = _rb.velocity;
-            if (dir.sqrMagnitude > 0.1) //(velocity.sqrMagnitude > 0.01)
+            if (dir.sqrMagnitude > 0.1)
             {
                 if (animator != null && !animator.GetBool(AnimationParameter))
                 {
