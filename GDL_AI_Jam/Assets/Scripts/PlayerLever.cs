@@ -4,6 +4,7 @@ using System.Collections.Generic;
 public class PlayerLever : MonoBehaviour
 {
     public int LeverID;
+    public GameObject[] ToggleVisibility;
 
     void Start()
     {
@@ -18,14 +19,14 @@ public class PlayerLever : MonoBehaviour
         }
     }
 
-    void OnTriggerStay(Collider otherCollider)
+    void OnTriggerEnter(Collider otherCollider)
     {
         Player other = otherCollider.GetComponent<Player>();
         if (other != null)
             OpenDoors(other);
     }
 
-    void OnCollisionStay(Collision collision)
+    void OnCollisionEnter(Collision collision)
     {
         for (int i = 0; i < collision.contacts.Length; i++)
         {
@@ -39,6 +40,10 @@ public class PlayerLever : MonoBehaviour
     {
         foreach (Door door in _matchingDoors)
             door.Open(LeverID);
+        foreach (GameObject GO in ToggleVisibility)
+        {
+            GO.SetActive(!GO.activeSelf);
+        }
     }
 
     List<Door> _matchingDoors;
