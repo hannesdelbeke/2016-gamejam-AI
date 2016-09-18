@@ -4,6 +4,7 @@ using System.Collections;
 public class Door : MonoBehaviour
 {
     public int KeyType = 1;
+    public int LeverType = -1;
 
     void Start()
     {
@@ -29,6 +30,12 @@ public class Door : MonoBehaviour
     void Open(Player player)
     {
         if (player.KeysHeld.ContainsKey(KeyType))
+            gameObject.SetActive(false);
+    }
+
+    public void Open(int LeverID)
+    {
+        if (LeverID == LeverType)
             gameObject.SetActive(false);
     }
 }

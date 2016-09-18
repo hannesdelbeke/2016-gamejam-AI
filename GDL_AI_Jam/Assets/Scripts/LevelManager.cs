@@ -6,6 +6,7 @@ class LevelManager : MonoBehaviour
     public PlayerSpawner PlayerSpawnerReference;
     public GameObject GameOverGUI;
     public Text GameOverGUIWinnerText;
+    public bool TESTMODE = false;
 
     void Start()
     {
@@ -30,6 +31,8 @@ class LevelManager : MonoBehaviour
 
     public void ShowGameOver(bool PlayerVictory)
     {
+        if (TESTMODE)
+            return;
         GameOverGUI.SetActive(true);
         GameOverGUIWinnerText.text = PlayerVictory ? "PLAYERS WIN" : "AI WINS";
         PlayerSpawnerReference.gameObject.SetActive(false); //prevent respawns once everyone dies
