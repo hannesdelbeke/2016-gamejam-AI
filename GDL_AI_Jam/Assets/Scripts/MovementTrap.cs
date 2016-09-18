@@ -17,7 +17,7 @@ public class MovementTrap : TriggerableTrap
         Debug.Log((active ? "Activating" : "Deactivating") + " Sliding Trap on " + TriggerButtonID);
 		if (particles)
 		particles.SetActive (active);
-        StartCoroutine(Slide(active ? MoveOffset : _startPos));
+		StartCoroutine(Slide(active ? MoveOffset : new Vector3(0,0,0)));
     }
 
     IEnumerator Slide(Vector3 moveOffset)
@@ -25,7 +25,7 @@ public class MovementTrap : TriggerableTrap
 		Vector3 fromPos = transform.localPosition;
         for (float t = 0; t < 1; t += Time.deltaTime / MovementSpeed)
         {
-            transform.localPosition = Vector3.Lerp(fromPos, moveOffset, t);
+			transform.localPosition = Vector3.Lerp(fromPos,_startPos +  moveOffset, t);
             yield return null;
         }
 		transform.localPosition = _startPos + moveOffset;
