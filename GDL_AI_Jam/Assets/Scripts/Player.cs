@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
     public int ControllerNumber;
     public Dictionary<int, Keycard> KeysHeld;
 
+    public PlayerSpawner Spawner { get; set; }
+
     void Start()
     {
         KeysHeld = new Dictionary<int,Keycard>();
@@ -15,7 +17,7 @@ public class Player : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
 
         //add random jitter so they don't all spawn on top of one another
-        this.transform.position = new Vector3(Random.Range(-0.1f, 0.1f), 0, Random.Range(-0.1f, 0.1f));
+        this.transform.position += new Vector3(Random.Range(-0.1f, 0.1f), 0, Random.Range(-0.1f, 0.1f));
     }
 
     void FixedUpdate()
@@ -38,8 +40,7 @@ public class Player : MonoBehaviour
 
     public void Kill()
     {
-        PlayerSpawner spawner = FindObjectOfType<PlayerSpawner>();
-        spawner.PlayerKilled(this);
+        Spawner.PlayerKilled(this);
         foreach (Keycard key in KeysHeld.Values)
             key.gameObject.SetActive(true);
     }

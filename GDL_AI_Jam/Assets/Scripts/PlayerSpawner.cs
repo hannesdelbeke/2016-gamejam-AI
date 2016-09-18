@@ -14,10 +14,7 @@ public class PlayerSpawner : MonoBehaviour
         
         _levelManager = FindObjectOfType<LevelManager>();
         if (_levelManager == null)
-        {
-            gameObject.AddComponent<LevelManager>();
-            _levelManager = GetComponent<LevelManager>();
-        }
+            Debug.LogError("A LevelManager Object must exist in the scene, and be set up with Game Over GUI elements");
 
         for (int i = 1; i < 4; i++)
         {
@@ -47,6 +44,7 @@ public class PlayerSpawner : MonoBehaviour
         GameObject playerGO = (GameObject)Instantiate(PlayerPrefab.gameObject, transform.position, Quaternion.identity);
         _players[i] = playerGO.GetComponent<Player>();
         _players[i].ControllerNumber = i + 1;
+        _players[i].Spawner = this;
         _levelManager.PlayerSpawned(i);
     }
 
