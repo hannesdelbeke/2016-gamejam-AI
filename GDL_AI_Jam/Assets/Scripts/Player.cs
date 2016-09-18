@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 public class Player : MonoBehaviour
 {
+    public GameObject DeathEffect = null;
     public float MoveForce = 50f;
     public float RotationSpeed = 5f;
     public bool CanMove;
@@ -64,6 +65,18 @@ public class Player : MonoBehaviour
         Spawner.PlayerKilled(this);
         foreach (Keycard key in KeysHeld.Values)
             key.gameObject.SetActive(true);
+        if(DeathEffect != null)
+        {
+            GameObject effect = GameObject.Instantiate<GameObject>(DeathEffect);
+            effect.transform.position = transform.position;
+            ParticleSystem[] particles = effect.GetComponentsInChildren<ParticleSystem>();
+            float delay = 0;
+            foreach(ParticleSystem particle in particles)
+            {
+                delay = Mathf.Max(delay, particle.duration);
+            }
+            Destroy(effect, delay);
+        }
     }
 
     public void GiveKey(int keyType, Keycard keyObject)
