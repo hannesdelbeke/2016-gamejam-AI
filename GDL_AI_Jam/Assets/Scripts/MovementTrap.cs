@@ -15,7 +15,7 @@ public class MovementTrap : TriggerableTrap
     {
         Debug.Log((active ? "Activating" : "Deactivating") + " Sliding Trap on " + TriggerButtonID);
         
-        StartCoroutine(Slide(active ? MoveOffset : -MoveOffset));
+        StartCoroutine(Slide(active ? MoveOffset : _startPos));
     }
 
     IEnumerator Slide(Vector3 moveOffset)
