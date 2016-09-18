@@ -4,6 +4,7 @@ using System.Collections.Generic;
 public class Player : MonoBehaviour
 {
     public float MoveForce = 50f;
+    public float RotationSpeed = 5f;
     public bool CanMove;
     public int ControllerNumber;
     public Dictionary<int, Keycard> KeysHeld;
@@ -31,9 +32,11 @@ public class Player : MonoBehaviour
 
             //rotate him to face the direction of travel
             Vector3 velocity = _rb.velocity;
-            if (velocity.sqrMagnitude > 0.01)
+            if (dir.sqrMagnitude > 0.1) //(velocity.sqrMagnitude > 0.01)
             {
-                //transform.rotation.SetLookRotation(velocity.normalized);
+                Quaternion targetRotation = Quaternion.LookRotation(dir);
+                Quaternion newRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, RotationSpeed);
+                transform.rotation = newRotation;
             }
         }
     }
