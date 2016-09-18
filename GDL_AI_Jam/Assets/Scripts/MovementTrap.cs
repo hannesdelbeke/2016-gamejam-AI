@@ -28,6 +28,5 @@ public class MovementTrap : TriggerableTrap
         }
     }
 
-
     Vector3 _startPos;
 }

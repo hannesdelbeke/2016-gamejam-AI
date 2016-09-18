@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 public class Player : MonoBehaviour
 {
+    public float MoveForce = 50f;
     public bool CanMove;
     public int ControllerNumber;
     public Dictionary<int, Keycard> KeysHeld;
@@ -17,14 +18,14 @@ public class Player : MonoBehaviour
         this.transform.position = new Vector3(Random.Range(-0.1f, 0.1f), 0, Random.Range(-0.1f, 0.1f));
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (CanMove)
         {
             float xInp = Input.GetAxis(_xAxisName + ControllerNumber);
             float yInp = Input.GetAxis(_yAxisName + ControllerNumber);
             Vector3 dir = new Vector3(xInp, 0, -yInp);
-            _rb.AddForce(dir * 50);
+            _rb.AddForce(dir * MoveForce);
 
             //rotate him to face the direction of travel
             Vector3 velocity = _rb.velocity;

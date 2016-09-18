@@ -4,16 +4,24 @@ using System.Collections;
 
 public class PlayerSpawner : MonoBehaviour
 {
-    public Text[] SpawnLabels;
+    public Text SpawnMessageLabel;
     public Player PlayerPrefab;
     public bool CanRespawn = false;
 
     void Start()
     {
         _players = new Player[4];
+        
+        _levelManager = FindObjectOfType<LevelManager>();
+        if (_levelManager == null)
+        {
+            gameObject.AddComponent<LevelManager>();
+            _levelManager = GetComponent<LevelManager>();
+        }
+
         for (int i = 1; i < 4; i++)
         {
-            ShowSpawn(i);
+            UpdateLabels();
             _players[i] = null;
         }
     }
@@ -25,10 +33,10 @@ public class PlayerSpawner : MonoBehaviour
         {
             if (_players[i] == null)
             {
-                if (Input.GetAxisRaw("A_" + i) > 0.5)
+                if (Input.GetAxisRaw("A_" + (i+1)) > 0.5)
                 {
                     SpawnPlayer(i);
-                    ClearMessage(i);
+                    UpdateLabels();
                 }
             }
         }
@@ -38,7 +46,8 @@ public class PlayerSpawner : MonoBehaviour
     {
         GameObject playerGO = (GameObject)Instantiate(PlayerPrefab.gameObject, transform.position, Quaternion.identity);
         _players[i] = playerGO.GetComponent<Player>();
-        _players[i].ControllerNumber = i;
+        _players[i].ControllerNumber = i + 1;
+        _levelManager.PlayerSpawned(i);
     }
 
     public void PlayerKilled(Player player)
@@ -46,31 +55,37 @@ public class PlayerSpawner : MonoBehaviour
         for (int i = 1; i < 4; i++)
             if (_players[i] == player)
             {
+                _levelManager.PlayerKilled(i);
                 if (CanRespawn)
                 {
-                    ShowReSpawn(i);
+                    UpdateLabels();
                     _players[i] = null;
                     Destroy(player.gameObject);
                 }
                 else
+                {
                     player.CanMove = false;
+                    player.gameObject.SetActive(false);
+                }
             }
     }
 
-    void ShowSpawn(int i)
+    void UpdateLabels()
     {
-        SpawnLabels[i].text = i + ": Press A to enter level";
-    }
-
-    void ShowReSpawn(int i)
-    {
-        SpawnLabels[i].text = i + ": Press A to respawn";
-    }
-
-    void ClearMessage(int i)
-    {
-        SpawnLabels[i].text = "";
+        string msg = "";
+        for (int i = 1; i < 4; i++)
+        {
+            if (_players[i] == null)
+            {
+                msg += "Player " + (i+1) + ": Press A to to enter level\n";
+            }
+        }
+        if (SpawnMessageLabel == null)
+            Debug.LogError("No GUI Label for spawn messages, please hook one up to the Player Spawner");
+        else 
+            SpawnMessageLabel.text = msg;
     }
 
     Player[] _players;
+    LevelManager _levelManager;
 }
