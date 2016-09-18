@@ -40,11 +40,16 @@ public class PlayerLever : MonoBehaviour
     {
         foreach (Door door in _matchingDoors)
             door.Open(LeverID);
-        foreach (GameObject GO in ToggleVisibility)
+        if (!_triggered)
         {
-            GO.SetActive(!GO.activeSelf);
+            foreach (GameObject GO in ToggleVisibility)
+            {
+                GO.SetActive(!GO.activeSelf);
+            }
+            _triggered = true;
         }
     }
 
+    bool _triggered = false;
     List<Door> _matchingDoors;
 }
