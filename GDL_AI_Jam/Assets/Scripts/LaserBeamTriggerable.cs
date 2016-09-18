@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class LaserBeam : TriggerableTrap 
+public class LaserBeamTriggerable : TriggerableTrap 
 {
     void Start() 
     {
