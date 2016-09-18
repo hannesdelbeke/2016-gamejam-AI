@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class LoadLevelOnClick : MonoBehaviour
 {
     public string SceneName;
+    public string AlternateButton = "A";
 
     void Start()
     {
@@ -20,7 +21,7 @@ public class LoadLevelOnClick : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetAxisRaw("A_1") > 0.5)
+        if (Input.GetAxisRaw(AlternateButton + "_1") > 0.5)
             OnClick();
     }
 

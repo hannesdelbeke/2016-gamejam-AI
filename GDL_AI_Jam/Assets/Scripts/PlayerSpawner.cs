@@ -7,10 +7,12 @@ public class PlayerSpawner : MonoBehaviour
     public Text SpawnMessageLabel;
     public Player PlayerPrefab;
     public bool CanRespawn = false;
+    public float TimeToRespawn = 5f;
 
     void Start()
     {
         _players = new Player[4];
+        _respawnTimers = new float[4];
         
         _levelManager = FindObjectOfType<LevelManager>();
         if (_levelManager == null)
@@ -28,7 +30,7 @@ public class PlayerSpawner : MonoBehaviour
         //check for absent players pushing A
         for (int i = 1; i < 4; i++)
         {
-            if (_players[i] == null)
+            if (_players[i] == null && _respawnTimers[i] <= 0)
             {
                 if (Input.GetAxisRaw("A_" + (i+1)) > 0.5)
                 {
@@ -37,6 +39,16 @@ public class PlayerSpawner : MonoBehaviour
                 }
             }
         }
+
+        bool IsAnyoneRespawning = false;
+        for (int i = 1; i < 4; i++)
+            if (_respawnTimers[i] > 0)
+            {
+                _respawnTimers[i] -= Time.deltaTime;
+                IsAnyoneRespawning = true;
+            }
+        if (IsAnyoneRespawning)
+            UpdateLabels();
     }
 
     void SpawnPlayer(int i)
@@ -59,6 +71,7 @@ public class PlayerSpawner : MonoBehaviour
                     UpdateLabels();
                     _players[i] = null;
                     Destroy(player.gameObject);
+                    _respawnTimers[i] = TimeToRespawn;
                 }
                 else
                 {
@@ -73,9 +86,13 @@ public class PlayerSpawner : MonoBehaviour
         string msg = "";
         for (int i = 1; i < 4; i++)
         {
-            if (_players[i] == null)
+            if (_players[i] == null && _respawnTimers[i] <= 0)
             {
                 msg += "Player " + (i+1) + ": Press A to to enter level\n";
+            }
+            else if (_players[i] == null && _respawnTimers[i] > 0)
+            {
+                msg += "Player " + (i + 1) + ": Respawn in " + Mathf.CeilToInt(_respawnTimers[i]) + " seconds\n";
             }
         }
         if (SpawnMessageLabel == null)
@@ -86,4 +103,5 @@ public class PlayerSpawner : MonoBehaviour
 
     Player[] _players;
     LevelManager _levelManager;
+    float[] _respawnTimers;
 }
