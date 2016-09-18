@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
         this.transform.position = new Vector3(Random.Range(-0.1f, 0.1f), 0, Random.Range(-0.1f, 0.1f));
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (CanMove)
         {
