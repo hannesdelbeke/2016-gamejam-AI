@@ -6,11 +6,6 @@ public class RotationTrap : TriggerableTrap
     public Vector3 RotateAngle;
     public float RotationSpeed;
 
-    void Start()
-    {
-        _startAngle = transform.eulerAngles;
-    }
-
     override public void ToggleState(bool active)
     {
         Debug.Log((active ? "Activating" : "Deactivating") + " Rotational Trap on " + TriggerButtonID);
@@ -29,7 +24,4 @@ public class RotationTrap : TriggerableTrap
             yield return null;
         }
     }
-
-
-    Vector3 _startAngle;
 }
