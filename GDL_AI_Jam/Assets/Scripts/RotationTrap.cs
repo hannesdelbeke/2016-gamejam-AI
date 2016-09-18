@@ -22,7 +22,7 @@ public class RotationTrap : TriggerableTrap
     {
         var fromAngle = transform.rotation;
         var toAngle = Quaternion.Euler(transform.eulerAngles + rotateTo);
-        Debug.LogFormat("From: {0} To: {1}", fromAngle, toAngle);
+
         for (float t = 0; t < 1; t += Time.deltaTime / RotationSpeed)
         {
             transform.rotation = Quaternion.Lerp(fromAngle, toAngle, t);
