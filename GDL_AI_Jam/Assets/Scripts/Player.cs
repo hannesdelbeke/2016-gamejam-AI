@@ -6,10 +6,17 @@ public class Player : MonoBehaviour
     public float MoveForce = 50f;
     public float RotationSpeed = 5f;
     public bool CanMove;
+    public string AnimationParameter = "IsMoving";
     public int ControllerNumber;
     public Dictionary<int, Keycard> KeysHeld;
 
     public PlayerSpawner Spawner { get; set; }
+    private Animator animator;
+
+    void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
 
     void Start()
     {
@@ -34,9 +41,20 @@ public class Player : MonoBehaviour
             Vector3 velocity = _rb.velocity;
             if (dir.sqrMagnitude > 0.1) //(velocity.sqrMagnitude > 0.01)
             {
+                if (animator != null && !animator.GetBool(AnimationParameter))
+                {
+                    animator.SetBool(AnimationParameter, true);
+                }
                 Quaternion targetRotation = Quaternion.LookRotation(dir);
                 Quaternion newRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, RotationSpeed);
                 transform.rotation = newRotation;
+            }
+            else
+            {
+                if (animator != null && animator.GetBool(AnimationParameter))
+                {
+                    animator.SetBool(AnimationParameter, false);
+                }
             }
         }
     }
