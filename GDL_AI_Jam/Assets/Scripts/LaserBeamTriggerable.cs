@@ -3,6 +3,8 @@ using System.Collections;
 
 public class LaserBeamTriggerable : TriggerableTrap 
 {
+    private Coroutine fireLaserCoroutine = null;
+
     void Start() 
     {
         _line = gameObject.GetComponent<LineRenderer>();
@@ -12,10 +14,11 @@ public class LaserBeamTriggerable : TriggerableTrap
     override public void ToggleState(bool active)
     {
         if (active)
-            StartCoroutine(FireLaser());
+            fireLaserCoroutine = StartCoroutine(FireLaser());
         else
         {
-            StopCoroutine(FireLaser());
+            if (fireLaserCoroutine != null)
+            StopCoroutine(fireLaserCoroutine);
             _line.enabled = false;
         }
     }
