@@ -9,9 +9,11 @@ public class Player : MonoBehaviour
     public bool CanMove;
     public string AnimationParameter = "IsMoving";
     public int ControllerNumber;
+    public SkinnedMeshRenderer meshRenderer;
     public Dictionary<int, Keycard> KeysHeld;
 
     public PlayerSpawner Spawner { get; set; }
+    public Color PlayerColour { get; set; }
     private Animator animator;
 
     void Awake()
@@ -69,11 +71,14 @@ public class Player : MonoBehaviour
         {
             GameObject effect = GameObject.Instantiate<GameObject>(DeathEffect);
             effect.transform.position = transform.position;
+            ParticleSystemRenderer psRenderer = effect.GetComponentInChildren<ParticleSystemRenderer>();
+            psRenderer.material.color = PlayerColour;
+
             ParticleSystem[] particles = effect.GetComponentsInChildren<ParticleSystem>();
             float delay = 0;
             foreach(ParticleSystem particle in particles)
             {
-                delay = Mathf.Max(delay, particle.duration);
+                delay = Mathf.Max(delay, particle.startLifetime);
             }
             Destroy(effect, delay);
         }

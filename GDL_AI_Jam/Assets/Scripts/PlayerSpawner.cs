@@ -6,6 +6,7 @@ public class PlayerSpawner : MonoBehaviour
 {
     public Text SpawnMessageLabel;
     public Player PlayerPrefab;
+    public Color[] PlayerColours = new Color[4];
     public bool CanRespawn = false;
     public float TimeToRespawn = 5f;
 
@@ -57,6 +58,8 @@ public class PlayerSpawner : MonoBehaviour
         _players[i] = playerGO.GetComponent<Player>();
         _players[i].ControllerNumber = i + 1;
         _players[i].Spawner = this;
+        _players[i].meshRenderer.material.color = PlayerColours[i];
+        _players[i].PlayerColour = PlayerColours[i];
         _levelManager.PlayerSpawned(i);
     }
 
