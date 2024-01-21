@@ -1,5 +1,6 @@
 # 2016-gamejam-AI
 gamejam w nick and bruno 20 9 2016
+AFAIK uses xbox controllers
 
 repos
 - https://bitbucket.org/tyr_arcana/gdl_ai_jam
